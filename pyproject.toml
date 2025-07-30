@@ -1,0 +1,33 @@
+[project]
+name = "pcmea"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "loguru>=0.7.3",
+    "matplotlib>=3.10.3",
+    "ruff>=0.11.12",
+    "scikit-learn>=1.6.1",
+    "scipy>=1.15.3",
+    "seaborn>=0.13.2",
+    "sentencepiece>=0.2.0",
+    "torch>=2.7.0",
+    "tqdm>=4.67.1",
+    "transformers>=4.52.4",
+]
+[tool.mypy]
+disable_error_code = [
+    "import-untyped",
+    "union-attr",
+    'misc',
+    'call-arg',
+    'arg-type',
+    'index',
+    'list-item',
+    "assignment",
+]
+check_untyped_defs = true
+disallow_untyped_defs = false
+[tool.ruff]
+exclude = [".venv", 'data', 'log', 'save_pkl', 'checkpoints']

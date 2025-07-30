@@ -1,0 +1,209 @@
+2025-07-19 16:55:23.858 | INFO     | __main__:init_data:240 - use data/FB15K_YAGO15K_0.8_train_ill.npy
+2025-07-19 16:55:23.979 | INFO     | model:__init__:118 - weight :tensor([[0.],
+        [0.],
+        [0.],
+        [0.],
+        [0.],
+        [0.],
+        [0.]])
+2025-07-19 16:55:23.980 | INFO     | model:__init__:132 - combo_indices :[1, 7, 31, 19, 4, 16, 20]
+2025-07-19 16:55:25.162 | INFO     | __main__:train:367 - Namespace(file_dir='data/mmkb-datasets/FB15K_YAGO15K', rate=0.8, seed=42, epochs=1000, check_point=10, hidden_units='300,300,300', heads='2,2', instance_normalization=False, lr=0.0005, dropout=0.0, attn_dropout=0.0, gph_dim=300, n_exp=5, device='cuda', topk=5, csls=True, csls_k=3, il_start=500, bsize=512, tau=0.1, tau2=4.0, feat_dim=300, use_project_head=False, zoom=0.1, reduction='mean', train_ill_path='data/FB15K_YAGO15K_0.8_train_ill.npy', fusion_weight_dim=0)
+2025-07-19 16:58:17.379 | INFO     | __main__:test:477 - tensor([0.3988, 0.2006, 0.3988, 0.2003, 0.1992, 0.2003], device='cuda:0')
+2025-07-19 16:58:18.150 | INFO     | __main__:evaluate_embedding:538 - epoch 10 - joint_emb avg: acc@[1, 5, 10]=[0.4888     0.66695    0.73730004], mr=27.594, mrr=0.574
+2025-07-19 17:00:31.379 | INFO     | __main__:test:477 - tensor([0.3999, 0.2009, 0.3999, 0.1996, 0.1994, 0.1996], device='cuda:0')
+2025-07-19 17:00:32.001 | INFO     | __main__:evaluate_embedding:538 - epoch 20 - joint_emb avg: acc@[1, 5, 10]=[0.64265    0.79684997 0.84309995], mr=15.665, mrr=0.713
+2025-07-19 17:02:45.461 | INFO     | __main__:test:477 - tensor([0.6004, 0.2010, 0.6002, 0.0000, 0.5975, 0.0000], device='cuda:0')
+2025-07-19 17:02:46.229 | INFO     | __main__:evaluate_embedding:538 - epoch 30 - joint_emb avg: acc@[1, 5, 10]=[0.71605 0.8449  0.8828 ], mr=10.232, mrr=0.776
+2025-07-19 17:04:58.916 | INFO     | __main__:test:477 - tensor([0.6015, 0.2009, 0.4024, 0.0000, 0.3993, 0.1976], device='cuda:0')
+2025-07-19 17:04:59.541 | INFO     | __main__:evaluate_embedding:538 - epoch 40 - joint_emb avg: acc@[1, 5, 10]=[0.75225    0.86004996 0.8982    ], mr=7.920, mrr=0.804
+2025-07-19 17:07:28.726 | INFO     | __main__:test:477 - tensor([0.6025, 0.2007, 0.4026, 0.1968, 0.3994, 0.0000], device='cuda:0')
+2025-07-19 17:07:29.345 | INFO     | __main__:evaluate_embedding:538 - epoch 50 - joint_emb avg: acc@[1, 5, 10]=[0.7616     0.86985004 0.90695   ], mr=7.385, mrr=0.812
+2025-07-19 17:09:21.004 | INFO     | __main__:test:477 - tensor([0.6033, 0.2005, 0.4027, 0.1962, 0.3995, 0.0000], device='cuda:0')
+2025-07-19 17:09:21.763 | INFO     | __main__:evaluate_embedding:538 - epoch 60 - joint_emb avg: acc@[1, 5, 10]=[0.76855004 0.8743     0.91005003], mr=7.132, mrr=0.818
+2025-07-19 17:11:14.109 | INFO     | __main__:test:477 - tensor([0.6041, 0.2002, 0.4027, 0.0000, 0.3995, 0.1956], device='cuda:0')
+2025-07-19 17:11:14.725 | INFO     | __main__:evaluate_embedding:538 - epoch 70 - joint_emb avg: acc@[1, 5, 10]=[0.7699     0.87654996 0.9125    ], mr=7.148, mrr=0.819
+2025-07-19 17:13:09.812 | INFO     | __main__:test:477 - tensor([0.6049, 0.2001, 0.4027, 0.0000, 0.3995, 0.1951], device='cuda:0')
+2025-07-19 17:13:10.440 | INFO     | __main__:evaluate_embedding:538 - epoch 80 - joint_emb avg: acc@[1, 5, 10]=[0.7719 0.879  0.9134], mr=7.304, mrr=0.821
+2025-07-19 17:15:03.016 | INFO     | __main__:test:477 - tensor([0.6055, 0.2000, 0.4026, 0.0000, 0.3994, 0.1945], device='cuda:0')
+2025-07-19 17:15:03.772 | INFO     | __main__:evaluate_embedding:538 - epoch 90 - joint_emb avg: acc@[1, 5, 10]=[0.7725 0.8799 0.9156], mr=7.372, mrr=0.822
+2025-07-19 17:17:15.075 | INFO     | __main__:test:477 - tensor([0.6060, 0.2000, 0.4024, 0.0000, 0.3991, 0.1940], device='cuda:0')
+2025-07-19 17:17:15.846 | INFO     | __main__:evaluate_embedding:538 - epoch 100 - joint_emb avg: acc@[1, 5, 10]=[0.77435    0.88125    0.91674995], mr=7.436, mrr=0.824
+2025-07-19 17:18:48.914 | INFO     | __main__:test:477 - tensor([0.6064, 0.2001, 0.4023, 0.0000, 0.3989, 0.1935], device='cuda:0')
+2025-07-19 17:18:49.535 | INFO     | __main__:evaluate_embedding:538 - epoch 110 - joint_emb avg: acc@[1, 5, 10]=[0.7741  0.8806  0.91585], mr=7.454, mrr=0.824
+2025-07-19 17:20:22.114 | INFO     | __main__:test:477 - tensor([0.6068, 0.2002, 0.4022, 0.0000, 0.3986, 0.1930], device='cuda:0')
+2025-07-19 17:20:22.734 | INFO     | __main__:evaluate_embedding:538 - epoch 120 - joint_emb avg: acc@[1, 5, 10]=[0.7759  0.87965 0.9161 ], mr=7.485, mrr=0.825
+2025-07-19 17:21:54.055 | INFO     | __main__:test:477 - tensor([0.6071, 0.2003, 0.4020, 0.0000, 0.3982, 0.1926], device='cuda:0')
+2025-07-19 17:21:54.679 | INFO     | __main__:evaluate_embedding:538 - epoch 130 - joint_emb avg: acc@[1, 5, 10]=[0.7757     0.88170004 0.9152    ], mr=7.547, mrr=0.825
+2025-07-19 17:23:26.722 | INFO     | __main__:test:477 - tensor([0.6074, 0.2005, 0.4019, 0.0000, 0.3979, 0.1921], device='cuda:0')
+2025-07-19 17:23:27.338 | INFO     | __main__:evaluate_embedding:538 - epoch 140 - joint_emb avg: acc@[1, 5, 10]=[0.77475 0.8819  0.9143 ], mr=7.599, mrr=0.825
+2025-07-19 17:25:13.340 | INFO     | __main__:test:477 - tensor([0.4160, 0.2007, 0.4018, 0.0000, 0.3975, 0.1916], device='cuda:0')
+2025-07-19 17:25:14.109 | INFO     | __main__:evaluate_embedding:538 - epoch 150 - joint_emb avg: acc@[1, 5, 10]=[0.77295    0.877      0.90779996], mr=9.042, mrr=0.822
+2025-07-19 17:26:24.914 | INFO     | __main__:test:477 - tensor([0.6081, 0.2010, 0.4017, 0.0000, 0.3973, 0.1908], device='cuda:0')
+2025-07-19 17:26:25.530 | INFO     | __main__:evaluate_embedding:538 - epoch 160 - joint_emb avg: acc@[1, 5, 10]=[0.77705 0.8844  0.9118 ], mr=7.760, mrr=0.827
+2025-07-19 17:27:37.225 | INFO     | __main__:test:477 - tensor([0.6085, 0.2013, 0.4017, 0.0000, 0.3971, 0.1903], device='cuda:0')
+2025-07-19 17:27:37.981 | INFO     | __main__:evaluate_embedding:538 - epoch 170 - joint_emb avg: acc@[1, 5, 10]=[0.77725 0.88485 0.9127 ], mr=7.831, mrr=0.827
+2025-07-19 17:28:49.213 | INFO     | __main__:test:477 - tensor([0.6088, 0.2015, 0.5914, 0.0000, 0.5865, 0.0000], device='cuda:0')
+2025-07-19 17:28:49.832 | INFO     | __main__:evaluate_embedding:538 - epoch 180 - joint_emb avg: acc@[1, 5, 10]=[0.7701  0.8772  0.90335], mr=9.742, mrr=0.820
+2025-07-19 17:29:59.503 | INFO     | __main__:test:477 - tensor([0.6091, 0.2018, 0.4016, 0.1891, 0.3966, 0.0000], device='cuda:0')
+2025-07-19 17:30:00.128 | INFO     | __main__:evaluate_embedding:538 - epoch 190 - joint_emb avg: acc@[1, 5, 10]=[0.77744997 0.8844     0.91295004], mr=8.137, mrr=0.827
+2025-07-19 17:31:24.428 | INFO     | __main__:test:477 - tensor([0.6094, 0.2021, 0.4016, 0.0000, 0.3963, 0.1885], device='cuda:0')
+2025-07-19 17:31:25.182 | INFO     | __main__:evaluate_embedding:538 - epoch 200 - joint_emb avg: acc@[1, 5, 10]=[0.77875 0.88505 0.91205], mr=8.107, mrr=0.828
+2025-07-19 17:32:14.235 | INFO     | __main__:test:477 - tensor([0.6096, 0.2024, 0.4015, 0.1880, 0.3961, 0.0000], device='cuda:0')
+2025-07-19 17:32:14.989 | INFO     | __main__:evaluate_embedding:538 - epoch 210 - joint_emb avg: acc@[1, 5, 10]=[0.77725    0.88479996 0.91295004], mr=8.150, mrr=0.827
+2025-07-19 17:33:04.835 | INFO     | __main__:test:477 - tensor([0.6098, 0.2027, 0.4015, 0.1875, 0.3958, 0.0000], device='cuda:0')
+2025-07-19 17:33:05.455 | INFO     | __main__:evaluate_embedding:538 - epoch 220 - joint_emb avg: acc@[1, 5, 10]=[0.777   0.88325 0.91275], mr=8.192, mrr=0.827
+2025-07-19 17:33:55.588 | INFO     | __main__:test:477 - tensor([0.4228, 0.2030, 0.2143, 0.1871, 0.2085, 0.1871], device='cuda:0')
+2025-07-19 17:33:56.226 | INFO     | __main__:evaluate_embedding:538 - epoch 230 - joint_emb avg: acc@[1, 5, 10]=[0.77610004 0.8844     0.9145    ], mr=7.878, mrr=0.827
+2025-07-19 17:34:44.871 | INFO     | __main__:test:477 - tensor([0.6101, 0.2032, 0.4014, 0.1867, 0.3954, 0.0000], device='cuda:0')
+2025-07-19 17:34:45.493 | INFO     | __main__:evaluate_embedding:538 - epoch 240 - joint_emb avg: acc@[1, 5, 10]=[0.77705    0.88304996 0.9125    ], mr=8.244, mrr=0.827
+2025-07-19 17:35:33.381 | INFO     | __main__:test:477 - tensor([0.6102, 0.2035, 0.5876, 0.0000, 0.5814, 0.0000], device='cuda:0')
+2025-07-19 17:35:33.995 | INFO     | __main__:evaluate_embedding:538 - epoch 250 - joint_emb avg: acc@[1, 5, 10]=[0.7734  0.87435 0.9018 ], mr=10.217, mrr=0.821
+2025-07-19 17:36:02.725 | INFO     | __main__:test:477 - tensor([0.6104, 0.2037, 0.4013, 0.1859, 0.3950, 0.0000], device='cuda:0')
+2025-07-19 17:36:03.471 | INFO     | __main__:evaluate_embedding:538 - epoch 260 - joint_emb avg: acc@[1, 5, 10]=[0.77680004 0.8837     0.91275   ], mr=8.307, mrr=0.827
+2025-07-19 17:36:31.915 | INFO     | __main__:test:477 - tensor([0.6105, 0.2038, 0.5870, 0.0000, 0.5805, 0.0000], device='cuda:0')
+2025-07-19 17:36:32.529 | INFO     | __main__:evaluate_embedding:538 - epoch 270 - joint_emb avg: acc@[1, 5, 10]=[0.77365 0.8763  0.9009 ], mr=10.295, mrr=0.821
+2025-07-19 17:37:01.750 | INFO     | __main__:test:477 - tensor([0.6105, 0.2040, 0.4013, 0.1854, 0.3947, 0.0000], device='cuda:0')
+2025-07-19 17:37:02.359 | INFO     | __main__:evaluate_embedding:538 - epoch 280 - joint_emb avg: acc@[1, 5, 10]=[0.7766  0.8839  0.91205], mr=8.390, mrr=0.827
+2025-07-19 17:37:31.962 | INFO     | __main__:test:477 - tensor([0.6106, 0.2042, 0.4013, 0.1852, 0.3946, 0.0000], device='cuda:0')
+2025-07-19 17:37:32.717 | INFO     | __main__:evaluate_embedding:538 - epoch 290 - joint_emb avg: acc@[1, 5, 10]=[0.77655    0.8837     0.91225004], mr=8.433, mrr=0.827
+2025-07-19 17:38:00.316 | INFO     | __main__:test:477 - tensor([0.4257, 0.2044, 0.4012, 0.1850, 0.3944, 0.0000], device='cuda:0')
+2025-07-19 17:38:01.078 | INFO     | __main__:evaluate_embedding:538 - epoch 300 - joint_emb avg: acc@[1, 5, 10]=[0.775      0.87654996 0.90470004], mr=9.545, mrr=0.822
+2025-07-19 17:38:29.684 | INFO     | __main__:test:477 - tensor([0.6107, 0.2046, 0.5859, 0.0000, 0.5790, 0.0000], device='cuda:0')
+2025-07-19 17:38:30.448 | INFO     | __main__:evaluate_embedding:538 - epoch 310 - joint_emb avg: acc@[1, 5, 10]=[0.77255    0.87609994 0.9002    ], mr=10.394, mrr=0.821
+2025-07-19 17:38:58.751 | INFO     | __main__:test:477 - tensor([0.6108, 0.2048, 0.5856, 0.0000, 0.5786, 0.0000], device='cuda:0')
+2025-07-19 17:38:59.390 | INFO     | __main__:evaluate_embedding:538 - epoch 320 - joint_emb avg: acc@[1, 5, 10]=[0.77275    0.87584996 0.90045   ], mr=10.410, mrr=0.821
+2025-07-19 17:39:28.051 | INFO     | __main__:test:477 - tensor([0.6108, 0.2050, 0.5854, 0.0000, 0.5781, 0.0000], device='cuda:0')
+2025-07-19 17:39:28.684 | INFO     | __main__:evaluate_embedding:538 - epoch 330 - joint_emb avg: acc@[1, 5, 10]=[0.77235 0.87545 0.9002 ], mr=10.441, mrr=0.820
+2025-07-19 17:39:57.308 | INFO     | __main__:test:477 - tensor([0.4269, 0.2052, 0.4011, 0.1840, 0.3938, 0.0000], device='cuda:0')
+2025-07-19 17:39:57.929 | INFO     | __main__:evaluate_embedding:538 - epoch 340 - joint_emb avg: acc@[1, 5, 10]=[0.77435    0.87609994 0.90555   ], mr=9.599, mrr=0.822
+2025-07-19 17:40:26.444 | INFO     | __main__:test:477 - tensor([0.6109, 0.2054, 0.5848, 0.0000, 0.5773, 0.0000], device='cuda:0')
+2025-07-19 17:40:27.193 | INFO     | __main__:evaluate_embedding:538 - epoch 350 - joint_emb avg: acc@[1, 5, 10]=[0.77235 0.875   0.8998 ], mr=10.500, mrr=0.820
+2025-07-19 17:40:55.959 | INFO     | __main__:test:477 - tensor([0.6109, 0.2056, 0.4010, 0.0000, 0.3934, 0.1835], device='cuda:0')
+2025-07-19 17:40:56.702 | INFO     | __main__:evaluate_embedding:538 - epoch 360 - joint_emb avg: acc@[1, 5, 10]=[0.77725 0.8848  0.91025], mr=8.510, mrr=0.827
+2025-07-19 17:41:24.934 | INFO     | __main__:test:477 - tensor([0.6109, 0.2059, 0.4010, 0.0000, 0.3932, 0.1832], device='cuda:0')
+2025-07-19 17:41:25.546 | INFO     | __main__:evaluate_embedding:538 - epoch 370 - joint_emb avg: acc@[1, 5, 10]=[0.7768  0.88415 0.90895], mr=8.564, mrr=0.826
+2025-07-19 17:41:53.959 | INFO     | __main__:test:477 - tensor([0.6110, 0.2061, 0.4009, 0.1829, 0.3930, 0.0000], device='cuda:0')
+2025-07-19 17:41:54.705 | INFO     | __main__:evaluate_embedding:538 - epoch 380 - joint_emb avg: acc@[1, 5, 10]=[0.775  0.8835 0.9107], mr=8.635, mrr=0.825
+2025-07-19 17:42:23.255 | INFO     | __main__:test:477 - tensor([0.4283, 0.2064, 0.2182, 0.1827, 0.2101, 0.1827], device='cuda:0')
+2025-07-19 17:42:23.865 | INFO     | __main__:evaluate_embedding:538 - epoch 390 - joint_emb avg: acc@[1, 5, 10]=[0.7757  0.88575 0.9134 ], mr=7.860, mrr=0.827
+2025-07-19 17:42:53.617 | INFO     | __main__:test:477 - tensor([0.4286, 0.2067, 0.2184, 0.1824, 0.2102, 0.1824], device='cuda:0')
+2025-07-19 17:42:54.364 | INFO     | __main__:evaluate_embedding:538 - epoch 400 - joint_emb avg: acc@[1, 5, 10]=[0.7759     0.88530004 0.91385   ], mr=7.869, mrr=0.827
+2025-07-19 17:43:23.630 | INFO     | __main__:test:477 - tensor([0.6109, 0.2070, 0.4007, 0.1821, 0.3923, 0.0000], device='cuda:0')
+2025-07-19 17:43:24.392 | INFO     | __main__:evaluate_embedding:538 - epoch 410 - joint_emb avg: acc@[1, 5, 10]=[0.7752     0.8828     0.91075003], mr=8.669, mrr=0.825
+2025-07-19 17:43:54.174 | INFO     | __main__:test:477 - tensor([0.6109, 0.2073, 0.4006, 0.0000, 0.3921, 0.1818], device='cuda:0')
+2025-07-19 17:43:54.786 | INFO     | __main__:evaluate_embedding:538 - epoch 420 - joint_emb avg: acc@[1, 5, 10]=[0.77655    0.88460004 0.91005003], mr=8.671, mrr=0.826
+2025-07-19 17:44:24.088 | INFO     | __main__:test:477 - tensor([0.6109, 0.2076, 0.4006, 0.0000, 0.3919, 0.1815], device='cuda:0')
+2025-07-19 17:44:24.715 | INFO     | __main__:evaluate_embedding:538 - epoch 430 - joint_emb avg: acc@[1, 5, 10]=[0.77655 0.88435 0.9085 ], mr=8.748, mrr=0.826
+2025-07-19 17:44:53.878 | INFO     | __main__:test:477 - tensor([0.6109, 0.2079, 0.4005, 0.1812, 0.3916, 0.0000], device='cuda:0')
+2025-07-19 17:44:54.490 | INFO     | __main__:evaluate_embedding:538 - epoch 440 - joint_emb avg: acc@[1, 5, 10]=[0.77525 0.8835  0.9096 ], mr=8.833, mrr=0.825
+2025-07-19 17:45:23.464 | INFO     | __main__:test:477 - tensor([0.4299, 0.2082, 0.4004, 0.1810, 0.3914, 0.0000], device='cuda:0')
+2025-07-19 17:45:24.074 | INFO     | __main__:evaluate_embedding:538 - epoch 450 - joint_emb avg: acc@[1, 5, 10]=[0.775      0.87545    0.90244997], mr=9.635, mrr=0.822
+2025-07-19 17:45:53.283 | INFO     | __main__:test:477 - tensor([0.6108, 0.2086, 0.5810, 0.0000, 0.5717, 0.0000], device='cuda:0')
+2025-07-19 17:45:53.897 | INFO     | __main__:evaluate_embedding:538 - epoch 460 - joint_emb avg: acc@[1, 5, 10]=[0.77164996 0.8719     0.89820004], mr=10.813, mrr=0.819
+2025-07-19 17:46:21.846 | INFO     | __main__:test:477 - tensor([0.6107, 0.2089, 0.4002, 0.0000, 0.3908, 0.1804], device='cuda:0')
+2025-07-19 17:46:22.594 | INFO     | __main__:evaluate_embedding:538 - epoch 470 - joint_emb avg: acc@[1, 5, 10]=[0.77635    0.88325    0.90849996], mr=8.899, mrr=0.826
+2025-07-19 17:46:51.081 | INFO     | __main__:test:477 - tensor([0.6107, 0.2093, 0.4002, 0.0000, 0.3906, 0.1801], device='cuda:0')
+2025-07-19 17:46:51.691 | INFO     | __main__:evaluate_embedding:538 - epoch 480 - joint_emb avg: acc@[1, 5, 10]=[0.77615    0.88304996 0.90805   ], mr=8.889, mrr=0.825
+2025-07-19 17:47:20.034 | INFO     | __main__:test:477 - tensor([0.6106, 0.2097, 0.4001, 0.0000, 0.3903, 0.1798], device='cuda:0')
+2025-07-19 17:47:20.780 | INFO     | __main__:evaluate_embedding:538 - epoch 490 - joint_emb avg: acc@[1, 5, 10]=[0.77635 0.8828  0.9071 ], mr=8.908, mrr=0.826
+2025-07-19 17:47:49.081 | INFO     | __main__:test:477 - tensor([0.4310, 0.2100, 0.4000, 0.1795, 0.3900, 0.0000], device='cuda:0')
+2025-07-19 17:47:49.703 | INFO     | __main__:evaluate_embedding:538 - epoch 500 - joint_emb avg: acc@[1, 5, 10]=[0.77454996 0.87545    0.902     ], mr=10.007, mrr=0.821
+2025-07-19 17:48:18.816 | INFO     | __main__:test:477 - tensor([0.6104, 0.2104, 0.5790, 0.0000, 0.5688, 0.0000], device='cuda:0')
+2025-07-19 17:48:19.430 | INFO     | __main__:evaluate_embedding:538 - epoch 510 - joint_emb avg: acc@[1, 5, 10]=[0.77145 0.87165 0.8971 ], mr=10.904, mrr=0.818
+2025-07-19 17:48:48.021 | INFO     | __main__:test:477 - tensor([0.6103, 0.2108, 0.5786, 0.0000, 0.5682, 0.0000], device='cuda:0')
+2025-07-19 17:48:48.651 | INFO     | __main__:evaluate_embedding:538 - epoch 520 - joint_emb avg: acc@[1, 5, 10]=[0.77125 0.87165 0.898  ], mr=10.943, mrr=0.818
+2025-07-19 17:49:17.307 | INFO     | __main__:test:477 - tensor([0.6102, 0.2112, 0.3997, 0.0000, 0.3891, 0.1785], device='cuda:0')
+2025-07-19 17:49:17.913 | INFO     | __main__:evaluate_embedding:538 - epoch 530 - joint_emb avg: acc@[1, 5, 10]=[0.7752     0.8826     0.90645003], mr=8.956, mrr=0.825
+2025-07-19 17:49:47.096 | INFO     | __main__:test:477 - tensor([0.4319, 0.2116, 0.2213, 0.1782, 0.2106, 0.1782], device='cuda:0')
+2025-07-19 17:49:47.705 | INFO     | __main__:evaluate_embedding:538 - epoch 540 - joint_emb avg: acc@[1, 5, 10]=[0.7779     0.88435    0.91429996], mr=7.898, mrr=0.827
+2025-07-19 17:50:15.205 | INFO     | __main__:test:477 - tensor([0.6100, 0.2121, 0.3995, 0.1779, 0.3885, 0.0000], device='cuda:0')
+2025-07-19 17:50:15.818 | INFO     | __main__:evaluate_embedding:538 - epoch 550 - joint_emb avg: acc@[1, 5, 10]=[0.7743     0.88189995 0.90735   ], mr=9.007, mrr=0.824
+2025-07-19 17:50:43.853 | INFO     | __main__:test:477 - tensor([0.6099, 0.2125, 0.3994, 0.0000, 0.3882, 0.1776], device='cuda:0')
+2025-07-19 17:50:44.468 | INFO     | __main__:evaluate_embedding:538 - epoch 560 - joint_emb avg: acc@[1, 5, 10]=[0.775  0.8826 0.9056], mr=9.062, mrr=0.824
+2025-07-19 17:51:12.401 | INFO     | __main__:test:477 - tensor([0.6098, 0.2129, 0.3992, 0.0000, 0.3878, 0.1773], device='cuda:0')
+2025-07-19 17:51:13.014 | INFO     | __main__:evaluate_embedding:538 - epoch 570 - joint_emb avg: acc@[1, 5, 10]=[0.7752  0.88215 0.90515], mr=9.062, mrr=0.825
+2025-07-19 17:51:41.691 | INFO     | __main__:test:477 - tensor([0.6096, 0.2134, 0.3991, 0.0000, 0.3875, 0.1770], device='cuda:0')
+2025-07-19 17:51:42.438 | INFO     | __main__:evaluate_embedding:538 - epoch 580 - joint_emb avg: acc@[1, 5, 10]=[0.7748     0.88125    0.90534997], mr=9.122, mrr=0.824
+2025-07-19 17:52:11.676 | INFO     | __main__:test:477 - tensor([0.4328, 0.2139, 0.3990, 0.0000, 0.3871, 0.1766], device='cuda:0')
+2025-07-19 17:52:12.290 | INFO     | __main__:evaluate_embedding:538 - epoch 590 - joint_emb avg: acc@[1, 5, 10]=[0.77725005 0.87434995 0.90155   ], mr=10.043, mrr=0.823
+2025-07-19 17:52:41.486 | INFO     | __main__:test:477 - tensor([0.6093, 0.2144, 0.3989, 0.1763, 0.3867, 0.0000], device='cuda:0')
+2025-07-19 17:52:42.096 | INFO     | __main__:evaluate_embedding:538 - epoch 600 - joint_emb avg: acc@[1, 5, 10]=[0.773  0.8817 0.9067], mr=9.103, mrr=0.823
+2025-07-19 17:53:10.730 | INFO     | __main__:test:477 - tensor([0.6091, 0.2149, 0.5747, 0.0000, 0.5624, 0.0000], device='cuda:0')
+2025-07-19 17:53:11.358 | INFO     | __main__:evaluate_embedding:538 - epoch 610 - joint_emb avg: acc@[1, 5, 10]=[0.7692  0.86875 0.8951 ], mr=11.092, mrr=0.816
+2025-07-19 17:53:43.434 | INFO     | __main__:test:477 - tensor([0.6090, 0.2154, 0.3986, 0.0000, 0.3860, 0.1756], device='cuda:0')
+2025-07-19 17:53:44.066 | INFO     | __main__:evaluate_embedding:538 - epoch 620 - joint_emb avg: acc@[1, 5, 10]=[0.77545    0.88145    0.90470004], mr=9.116, mrr=0.824
+2025-07-19 17:54:11.782 | INFO     | __main__:test:477 - tensor([0.4335, 0.2159, 0.2232, 0.1753, 0.2103, 0.1753], device='cuda:0')
+2025-07-19 17:54:12.397 | INFO     | __main__:evaluate_embedding:538 - epoch 630 - joint_emb avg: acc@[1, 5, 10]=[0.77680004 0.88485    0.91185   ], mr=8.081, mrr=0.826
+2025-07-19 17:54:40.343 | INFO     | __main__:test:477 - tensor([0.4336, 0.2164, 0.2233, 0.1750, 0.2103, 0.1750], device='cuda:0')
+2025-07-19 17:54:41.092 | INFO     | __main__:evaluate_embedding:538 - epoch 640 - joint_emb avg: acc@[1, 5, 10]=[0.77744997 0.88505    0.91295004], mr=7.970, mrr=0.827
+2025-07-19 17:55:08.982 | INFO     | __main__:test:477 - tensor([0.6084, 0.2169, 0.3982, 0.0000, 0.3849, 0.1747], device='cuda:0')
+2025-07-19 17:55:09.734 | INFO     | __main__:evaluate_embedding:538 - epoch 650 - joint_emb avg: acc@[1, 5, 10]=[0.77524996 0.8815     0.90425   ], mr=9.217, mrr=0.824
+2025-07-19 17:55:38.545 | INFO     | __main__:test:477 - tensor([0.4339, 0.2174, 0.2237, 0.1743, 0.2102, 0.1743], device='cuda:0')
+2025-07-19 17:55:39.156 | INFO     | __main__:evaluate_embedding:538 - epoch 660 - joint_emb avg: acc@[1, 5, 10]=[0.77765 0.88415 0.9123 ], mr=8.122, mrr=0.827
+2025-07-19 17:56:09.261 | INFO     | __main__:test:477 - tensor([0.4341, 0.2179, 0.3979, 0.1740, 0.3841, 0.0000], device='cuda:0')
+2025-07-19 17:56:09.871 | INFO     | __main__:evaluate_embedding:538 - epoch 670 - joint_emb avg: acc@[1, 5, 10]=[0.7723 0.8714 0.8982], mr=10.114, mrr=0.819
+2025-07-19 17:56:39.380 | INFO     | __main__:test:477 - tensor([0.4342, 0.2185, 0.3978, 0.1737, 0.3837, 0.0000], device='cuda:0')
+2025-07-19 17:56:39.992 | INFO     | __main__:evaluate_embedding:538 - epoch 680 - joint_emb avg: acc@[1, 5, 10]=[0.77345 0.87075 0.89755], mr=10.110, mrr=0.819
+2025-07-19 17:57:09.507 | INFO     | __main__:test:477 - tensor([0.6076, 0.2190, 0.3977, 0.0000, 0.3833, 0.1733], device='cuda:0')
+2025-07-19 17:57:10.142 | INFO     | __main__:evaluate_embedding:538 - epoch 690 - joint_emb avg: acc@[1, 5, 10]=[0.7757  0.88105 0.9029 ], mr=9.263, mrr=0.824
+2025-07-19 17:57:39.656 | INFO     | __main__:test:477 - tensor([0.4344, 0.2196, 0.3975, 0.0000, 0.3829, 0.1730], device='cuda:0')
+2025-07-19 17:57:40.285 | INFO     | __main__:evaluate_embedding:538 - epoch 700 - joint_emb avg: acc@[1, 5, 10]=[0.77524996 0.87145    0.89954996], mr=10.199, mrr=0.821
+2025-07-19 17:58:09.867 | INFO     | __main__:test:477 - tensor([0.4345, 0.2202, 0.2247, 0.1727, 0.2098, 0.1727], device='cuda:0')
+2025-07-19 17:58:10.499 | INFO     | __main__:evaluate_embedding:538 - epoch 710 - joint_emb avg: acc@[1, 5, 10]=[0.77655 0.8828  0.90985], mr=8.184, mrr=0.826
+2025-07-19 17:58:38.590 | INFO     | __main__:test:477 - tensor([0.4346, 0.2208, 0.2249, 0.1723, 0.2097, 0.1723], device='cuda:0')
+2025-07-19 17:58:39.198 | INFO     | __main__:evaluate_embedding:538 - epoch 720 - joint_emb avg: acc@[1, 5, 10]=[0.77875 0.8844  0.9116 ], mr=8.152, mrr=0.827
+2025-07-19 17:59:07.825 | INFO     | __main__:test:477 - tensor([0.6067, 0.2213, 0.3971, 0.0000, 0.3816, 0.1720], device='cuda:0')
+2025-07-19 17:59:08.439 | INFO     | __main__:evaluate_embedding:538 - epoch 730 - joint_emb avg: acc@[1, 5, 10]=[0.7752     0.8806     0.90244997], mr=9.427, mrr=0.824
+2025-07-19 17:59:36.931 | INFO     | __main__:test:477 - tensor([0.6065, 0.2219, 0.3969, 0.0000, 0.3812, 0.1716], device='cuda:0')
+2025-07-19 17:59:37.679 | INFO     | __main__:evaluate_embedding:538 - epoch 740 - joint_emb avg: acc@[1, 5, 10]=[0.7752     0.8797     0.90314996], mr=9.391, mrr=0.824
+2025-07-19 18:00:06.551 | INFO     | __main__:test:477 - tensor([0.4349, 0.2224, 0.3968, 0.1713, 0.3808, 0.0000], device='cuda:0')
+2025-07-19 18:00:07.162 | INFO     | __main__:evaluate_embedding:538 - epoch 750 - joint_emb avg: acc@[1, 5, 10]=[0.77145004 0.87075    0.89755   ], mr=10.283, mrr=0.818
+2025-07-19 18:00:35.919 | INFO     | __main__:test:477 - tensor([0.6060, 0.2230, 0.3966, 0.0000, 0.3804, 0.1710], device='cuda:0')
+2025-07-19 18:00:36.667 | INFO     | __main__:evaluate_embedding:538 - epoch 760 - joint_emb avg: acc@[1, 5, 10]=[0.77475 0.87925 0.9027 ], mr=9.431, mrr=0.823
+2025-07-19 18:01:05.419 | INFO     | __main__:test:477 - tensor([0.4351, 0.2236, 0.2258, 0.1706, 0.2093, 0.1706], device='cuda:0')
+2025-07-19 18:01:06.031 | INFO     | __main__:evaluate_embedding:538 - epoch 770 - joint_emb avg: acc@[1, 5, 10]=[0.7781     0.8826     0.91024995], mr=8.084, mrr=0.826
+2025-07-19 18:01:34.701 | INFO     | __main__:test:477 - tensor([0.6055, 0.2242, 0.3963, 0.1703, 0.3795, 0.0000], device='cuda:0')
+2025-07-19 18:01:35.311 | INFO     | __main__:evaluate_embedding:538 - epoch 780 - joint_emb avg: acc@[1, 5, 10]=[0.773  0.877  0.9029], mr=9.477, mrr=0.821
+2025-07-19 18:02:05.091 | INFO     | __main__:test:477 - tensor([0.4353, 0.2248, 0.3962, 0.0000, 0.3791, 0.1700], device='cuda:0')
+2025-07-19 18:02:05.836 | INFO     | __main__:evaluate_embedding:538 - epoch 790 - joint_emb avg: acc@[1, 5, 10]=[0.7741  0.87095 0.89865], mr=10.275, mrr=0.820
+2025-07-19 18:02:35.518 | INFO     | __main__:test:477 - tensor([0.4353, 0.2254, 0.2263, 0.1696, 0.2090, 0.1696], device='cuda:0')
+2025-07-19 18:02:36.145 | INFO     | __main__:evaluate_embedding:538 - epoch 800 - joint_emb avg: acc@[1, 5, 10]=[0.77765    0.88215    0.91075003], mr=8.110, mrr=0.826
+2025-07-19 18:03:05.269 | INFO     | __main__:test:477 - tensor([0.6047, 0.2260, 0.3958, 0.1693, 0.3782, 0.0000], device='cuda:0')
+2025-07-19 18:03:05.881 | INFO     | __main__:evaluate_embedding:538 - epoch 810 - joint_emb avg: acc@[1, 5, 10]=[0.77185 0.8772  0.90225], mr=9.497, mrr=0.820
+2025-07-19 18:03:35.512 | INFO     | __main__:test:477 - tensor([0.4354, 0.2266, 0.2267, 0.1690, 0.2088, 0.1690], device='cuda:0')
+2025-07-19 18:03:36.126 | INFO     | __main__:evaluate_embedding:538 - epoch 820 - joint_emb avg: acc@[1, 5, 10]=[0.7788     0.8808     0.90954995], mr=8.340, mrr=0.826
+2025-07-19 18:04:04.021 | INFO     | __main__:test:477 - tensor([0.6041, 0.2272, 0.3955, 0.1686, 0.3773, 0.0000], device='cuda:0')
+2025-07-19 18:04:04.635 | INFO     | __main__:evaluate_embedding:538 - epoch 830 - joint_emb avg: acc@[1, 5, 10]=[0.7721     0.87609994 0.90225   ], mr=9.458, mrr=0.821
+2025-07-19 18:04:33.283 | INFO     | __main__:test:477 - tensor([0.4355, 0.2279, 0.2270, 0.1683, 0.2085, 0.1683], device='cuda:0')
+2025-07-19 18:04:34.030 | INFO     | __main__:evaluate_embedding:538 - epoch 840 - joint_emb avg: acc@[1, 5, 10]=[0.77905    0.8806     0.90935004], mr=8.268, mrr=0.826
+2025-07-19 18:05:03.282 | INFO     | __main__:test:477 - tensor([0.6035, 0.2285, 0.3952, 0.1680, 0.3763, 0.0000], device='cuda:0')
+2025-07-19 18:05:03.897 | INFO     | __main__:evaluate_embedding:538 - epoch 850 - joint_emb avg: acc@[1, 5, 10]=[0.7721 0.875  0.902 ], mr=9.552, mrr=0.820
+2025-07-19 18:05:33.520 | INFO     | __main__:test:477 - tensor([0.6032, 0.2292, 0.3950, 0.1676, 0.3758, 0.0000], device='cuda:0')
+2025-07-19 18:05:34.127 | INFO     | __main__:evaluate_embedding:538 - epoch 860 - joint_emb avg: acc@[1, 5, 10]=[0.77345 0.87455 0.9    ], mr=9.637, mrr=0.821
+2025-07-19 18:06:02.766 | INFO     | __main__:test:477 - tensor([0.6029, 0.2299, 0.3948, 0.1673, 0.3753, 0.0000], device='cuda:0')
+2025-07-19 18:06:03.375 | INFO     | __main__:evaluate_embedding:538 - epoch 870 - joint_emb avg: acc@[1, 5, 10]=[0.7723     0.87590003 0.90155   ], mr=9.555, mrr=0.821
+2025-07-19 18:06:33.148 | INFO     | __main__:test:477 - tensor([0.4356, 0.2306, 0.2277, 0.1669, 0.2079, 0.1669], device='cuda:0')
+2025-07-19 18:06:33.759 | INFO     | __main__:evaluate_embedding:538 - epoch 880 - joint_emb avg: acc@[1, 5, 10]=[0.77835    0.87874997 0.9096    ], mr=8.355, mrr=0.825
+2025-07-19 18:07:02.302 | INFO     | __main__:test:477 - tensor([0.6022, 0.2313, 0.3944, 0.0000, 0.3743, 0.1666], device='cuda:0')
+2025-07-19 18:07:02.923 | INFO     | __main__:evaluate_embedding:538 - epoch 890 - joint_emb avg: acc@[1, 5, 10]=[0.775      0.87724996 0.89935   ], mr=9.698, mrr=0.822
+2025-07-19 18:07:31.653 | INFO     | __main__:test:477 - tensor([0.4356, 0.2320, 0.3943, 0.1662, 0.3738, 0.0000], device='cuda:0')
+2025-07-19 18:07:32.284 | INFO     | __main__:evaluate_embedding:538 - epoch 900 - joint_emb avg: acc@[1, 5, 10]=[0.76875 0.8656  0.89445], mr=10.444, mrr=0.815
+2025-07-19 18:08:01.016 | INFO     | __main__:test:477 - tensor([0.6014, 0.2327, 0.3941, 0.1659, 0.3733, 0.0000], device='cuda:0')
+2025-07-19 18:08:01.631 | INFO     | __main__:evaluate_embedding:538 - epoch 910 - joint_emb avg: acc@[1, 5, 10]=[0.773   0.87385 0.90045], mr=9.571, mrr=0.821
+2025-07-19 18:08:30.556 | INFO     | __main__:test:477 - tensor([0.4355, 0.2334, 0.2283, 0.1655, 0.2072, 0.1655], device='cuda:0')
+2025-07-19 18:08:31.170 | INFO     | __main__:evaluate_embedding:538 - epoch 920 - joint_emb avg: acc@[1, 5, 10]=[0.77855 0.87815 0.90845], mr=8.357, mrr=0.825
+2025-07-19 18:08:59.985 | INFO     | __main__:test:477 - tensor([0.4355, 0.2341, 0.2285, 0.1652, 0.2070, 0.1652], device='cuda:0')
+2025-07-19 18:09:00.604 | INFO     | __main__:evaluate_embedding:538 - epoch 930 - joint_emb avg: acc@[1, 5, 10]=[0.77835    0.87810004 0.9074    ], mr=8.604, mrr=0.825
+2025-07-19 18:09:29.438 | INFO     | __main__:test:477 - tensor([0.4355, 0.2348, 0.2287, 0.1649, 0.2069, 0.1649], device='cuda:0')
+2025-07-19 18:09:30.054 | INFO     | __main__:evaluate_embedding:538 - epoch 940 - joint_emb avg: acc@[1, 5, 10]=[0.77925 0.877   0.9065 ], mr=8.658, mrr=0.825
+2025-07-19 18:09:58.906 | INFO     | __main__:test:477 - tensor([0.4355, 0.2354, 0.2288, 0.1645, 0.2067, 0.1645], device='cuda:0')
+2025-07-19 18:09:59.517 | INFO     | __main__:evaluate_embedding:538 - epoch 950 - joint_emb avg: acc@[1, 5, 10]=[0.77814996 0.8761     0.90695   ], mr=8.473, mrr=0.825
+2025-07-19 18:10:29.276 | INFO     | __main__:test:477 - tensor([0.4355, 0.2362, 0.2290, 0.1642, 0.2065, 0.1642], device='cuda:0')
+2025-07-19 18:10:29.885 | INFO     | __main__:evaluate_embedding:538 - epoch 960 - joint_emb avg: acc@[1, 5, 10]=[0.77905 0.877   0.9076 ], mr=8.379, mrr=0.825
+2025-07-19 18:10:59.386 | INFO     | __main__:test:477 - tensor([0.4354, 0.2369, 0.3929, 0.1638, 0.3701, 0.0000], device='cuda:0')
+2025-07-19 18:10:59.996 | INFO     | __main__:evaluate_embedding:538 - epoch 970 - joint_emb avg: acc@[1, 5, 10]=[0.76874995 0.86495    0.89419997], mr=10.542, mrr=0.814
+2025-07-19 18:11:29.094 | INFO     | __main__:test:477 - tensor([0.5988, 0.2377, 0.3927, 0.0000, 0.3696, 0.1635], device='cuda:0')
+2025-07-19 18:11:29.724 | INFO     | __main__:evaluate_embedding:538 - epoch 980 - joint_emb avg: acc@[1, 5, 10]=[0.77435 0.875   0.89775], mr=9.859, mrr=0.821
+2025-07-19 18:11:59.515 | INFO     | __main__:test:477 - tensor([0.5984, 0.2385, 0.3925, 0.1631, 0.3690, 0.0000], device='cuda:0')
+2025-07-19 18:12:00.148 | INFO     | __main__:evaluate_embedding:538 - epoch 990 - joint_emb avg: acc@[1, 5, 10]=[0.7721     0.87345004 0.89890003], mr=9.723, mrr=0.820
+2025-07-19 18:12:26.016 | INFO     | __main__:<module>:553 - Best avg epoch <200>: acc@[1, 5, 10]=[0.77875 0.88505 0.91205], mr=8.107, mrr=0.828
