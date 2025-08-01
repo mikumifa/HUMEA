@@ -13,8 +13,6 @@ from torch.nn.parameter import Parameter
 from torch.nn.modules.module import Module
 import torch.nn.functional as F
 
-# !!! 需要改为执行用的GPU号码 或者改成0
-
 
 class SpecialSpmmFunction(torch.autograd.Function):
     """Special function for only sparse region backpropataion layer."""
@@ -210,7 +208,7 @@ class PWLayer(nn.Module):
         return self.lin(self.dropout(x) - self.bias)
 
 
-class MoEAdaptorLayer(nn.Module):  # MOE论文上面的源代码,MoE门控融合
+class MoEAdaptorLayer(nn.Module):
     """MoE-enhanced Adaptor"""
 
     def __init__(self, n_exps=5, layers=[], dropout=0.0, noise=True):

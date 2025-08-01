@@ -33,7 +33,6 @@ class icl_loss(nn.Module):
         return loss
 
     def forward(self, emb, train_links, emb2=None, norm=True):
-        # norm 等价于L2
         if norm:
             emb = F.normalize(emb, dim=1)
             if emb2 is not None:
