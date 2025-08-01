@@ -251,7 +251,7 @@ class MoEAdaptorLayer(nn.Module):
             multiple_outputs.sum(dim=-2),
             expert_outputs,
             gates,
-        )  # multiple_outputs是混合的，expert_outputs是多个，gates是权重
+        )
 
 
 class MultiLossLayer(nn.Module):
