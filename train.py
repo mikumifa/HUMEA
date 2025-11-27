@@ -1,16 +1,18 @@
 import argparse
-from datetime import datetime
 import os
 import random
 import time
+from datetime import datetime
+
 import numpy as np
 import torch
+import torch.nn.functional as F
 import torch.optim as optim
 from loguru import logger
-import torch.nn.functional as F
+
 from layers import MultiLossLayer
 from loss import ial_loss, icl_loss
-from model import MultiModalEncoder, list_rebul_sort
+from model import MIEstimator, MultiModalEncoder, list_rebul_sort
 from utils import (
     csls_sim,
     get_adjr,
@@ -24,9 +26,9 @@ from utils import (
     read_raw_data,
 )
 
-timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-log_file = f"{timestamp}.log"
-logger.add("log/" + log_file)
+best_result = None
+best_mrr = 0.0
+top_k = [1, 5, 10]
 
 
 def load_img_features(ent_num, file_dir):
@@ -77,7 +79,7 @@ class HUMEA:
         self.parser = argparse.ArgumentParser()
         self.args = self.parse_options(self.parser)
         self.set_seed(self.args.seed, True)
-        self.device = torch.device("cuda")
+        self.device = torch.device(self.args.device)
         self.init_data()
         self.init_model()
 
@@ -134,6 +136,21 @@ class HUMEA:
             default=5,
         )
         parser.add_argument(
+            "--device",
+            type=str,
+            default="cuda",
+        )
+        parser.add_argument(
+            "--topk",
+            type=int,
+            default=5,
+        )
+        parser.add_argument(
+            "--without",
+            type=int,
+            default=0,
+        )
+        parser.add_argument(
             "--csls", action="store_true", default=False, help="use CSLS for inference"
         )
         parser.add_argument("--csls_k", type=int, default=10, help="top k for csls")
@@ -142,13 +159,13 @@ class HUMEA:
         )
         parser.add_argument("--bsize", type=int, default=7500, help="batch size")
         parser.add_argument(
-            "--tau",
+            "--tau_cl",
             type=float,
             default=0.1,
             help="the temperature factor of contrastive loss",
         )
         parser.add_argument(
-            "--tau2",
+            "--tau_al",
             type=float,
             default=1,
             help="the temperature factor of alignment loss",
@@ -164,11 +181,22 @@ class HUMEA:
         )
 
         parser.add_argument(
-            "--zoom", type=float, default=0.1, help="narrow the range of losses"
+            "--al_loss", type=float, default=0.1, help="narrow the range of losses"
+        )
+        parser.add_argument(
+            "--cl_loss", type=float, default=1, help="narrow the range of losses"
         )
         parser.add_argument("--reduction", type=str, default="mean", help="[sum|mean]")
         parser.add_argument("--train_ill_path", type=str, default="", help="")
-
+        parser.add_argument(
+            "--fusion_weight_dim",
+            type=int,
+            default=0,
+            help="fusion_weight_dim",
+        )
+        parser.add_argument(
+            "--mi_loss", type=float, default=0.0001, help="the weight of NTXent Loss"
+        )
         return parser.parse_args()
 
     @staticmethod
@@ -183,12 +211,16 @@ class HUMEA:
         # Load data
         lang_list = [1, 2]
         file_dir = self.args.file_dir
+        filename = os.path.split(file_dir)[-1].upper()
+        self.train_name = f"{filename}_{self.args.rate}"
         device = self.device
         self.ent2id_dict, self.ills, self.triples = read_raw_data(file_dir, lang_list)
         left_ents = get_ids(os.path.join(file_dir, "ent_ids_1"))
         right_ents = get_ids(os.path.join(file_dir, "ent_ids_2"))
         self.ENT_NUM = len(self.ent2id_dict)
-
+        timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        log_file = f"{self.train_name}_{timestamp}.log"
+        logger.add("log/" + log_file)
         np.random.shuffle(self.ills)
         self.img_features = F.normalize(
             torch.Tensor(load_img_features(self.ENT_NUM, file_dir)).to(device)
@@ -199,6 +231,22 @@ class HUMEA:
         self.rel_txt_features = F.normalize(
             torch.Tensor(load_rel_txt_features(self.ENT_NUM, file_dir)).to(device)
         )
+        self.adj = get_adjr(self.ENT_NUM, self.triples, norm=True).to(self.device)
+        self.rel_features = torch.Tensor(
+            load_relation(self.ENT_NUM, self.triples, 1000)
+        ).to(device)
+
+        self.att_features = torch.Tensor(
+            load_attr(
+                [
+                    os.path.join(file_dir, "training_attrs_1"),
+                    os.path.join(file_dir, "training_attrs_2"),
+                ],
+                self.ENT_NUM,
+                self.ent2id_dict,
+                1000,
+            )
+        ).to(device)
         # train/val/test split
         if self.args.train_ill_path:
             logger.info(f"use {self.args.train_ill_path}")
@@ -218,31 +266,15 @@ class HUMEA:
         self.right_non_train = list(
             set(right_ents) - set(self.train_ill[:, 1].tolist())
         )
-        self.rel_features = torch.Tensor(
-            load_relation(self.ENT_NUM, self.triples, 1000)
-        ).to(device)
-
-        self.att_features = torch.Tensor(
-            load_attr(
-                [
-                    os.path.join(file_dir, "training_attrs_1"),
-                    os.path.join(file_dir, "training_attrs_2"),
-                ],
-                self.ENT_NUM,
-                self.ent2id_dict,
-                1000,
-            )
-        ).to(device)
-        self.adj = get_adjr(self.ENT_NUM, self.triples, norm=True).to(self.device)
 
     def init_model(self):
+        self.mi_estimator = MIEstimator(self.args).to(self.device)
         self.multimodal_encoder = MultiModalEncoder(
             args=self.args,
             ent_num=self.ENT_NUM,
         ).to(self.device)
         self.multi_loss_layer = MultiLossLayer(loss_num=6).to(self.device)
         self.align_multi_loss_layer = MultiLossLayer(loss_num=6).to(self.device)
-
         self.params = [
             {
                 "params": list(self.multimodal_encoder.parameters())
@@ -250,18 +282,22 @@ class HUMEA:
                 + list(self.align_multi_loss_layer.parameters())
             }
         ]
+
         self.optimizer = optim.AdamW(self.params, lr=self.args.lr)
+        self.mi_optimizer = optim.AdamW(
+            [{"params": list(self.mi_estimator.parameters())}], lr=self.args.lr
+        )
         self.criterion_cl = icl_loss(
             device=self.device,
-            tau=self.args.tau,
+            tau=self.args.tau_cl,
             ab_weight=0.5,
             n_view=2,
         )
         self.criterion_align = ial_loss(
             device=self.device,
-            tau=self.args.tau2,
+            tau=self.args.tau_al,
             ab_weight=0.5,
-            zoom=self.args.zoom,
+            zoom=self.args.al_loss,
             reduction=self.args.reduction,
         )
 
@@ -304,6 +340,7 @@ class HUMEA:
     def inner_view_loss(
         self, gph_emb, rel_emb, att_emb, att_text_emb, rel_text_emb, img_emb, train_ill
     ):
+        zoom = self.args.cl_loss
         loss_GCN = self.criterion_cl(gph_emb, train_ill)
         loss_rel = self.criterion_cl(rel_emb, train_ill)
         loss_att = self.criterion_cl(att_emb, train_ill)
@@ -311,8 +348,11 @@ class HUMEA:
         loss_att_text = self.criterion_cl(att_text_emb, train_ill)
         loss_rel_text = self.criterion_cl(rel_text_emb, train_ill)
 
-        total_loss = self.multi_loss_layer(
-            [loss_GCN, loss_rel, loss_att, loss_att_text, loss_rel_text, loss_img]
+        total_loss = (
+            self.multi_loss_layer(
+                [loss_GCN, loss_rel, loss_att, loss_att_text, loss_rel_text, loss_img]
+            )
+            * zoom
         )
         return total_loss
 
@@ -327,7 +367,7 @@ class HUMEA:
         img_emb,
         train_ill,
     ):
-        zoom = self.args.zoom
+        zoom = self.args.al_loss
         loss_GCN = self.criterion_align(gph_emb, joint_emb, train_ill)
         loss_rel = self.criterion_align(rel_emb, joint_emb, train_ill)
         loss_att = self.criterion_align(att_emb, joint_emb, train_ill)
@@ -354,16 +394,20 @@ class HUMEA:
             self.multimodal_encoder.train()
             self.multi_loss_layer.train()
             self.align_multi_loss_layer.train()
+            self.mi_estimator.eval()
             self.optimizer.zero_grad()
 
             (
-                gph_emb,
-                img_emb,
-                rel_emb,
-                att_emb,
-                att_text_emb,
-                rel_text_emb,
-                joint_emb,
+                [
+                    gph_emb,
+                    img_emb,
+                    rel_emb,
+                    att_emb,
+                    att_text_emb,
+                    rel_text_emb,
+                    joint_emb,
+                ],
+                embeddings,
             ) = self.multimodal_encoder(
                 self.device,
                 self.input_idx,
@@ -371,10 +415,11 @@ class HUMEA:
                 self.img_features,
                 self.rel_features,
                 self.att_features,
-                att_text_features=self.att_txt_features,
-                rel_text_features=self.rel_txt_features,
+                self.att_txt_features,
+                self.rel_txt_features,
+                exp_outputs=True,
             )
-            loss_all = []
+            loss_all = [self.args.mi_loss * self.mi_estimator(embeddings)]
             np.random.shuffle(self.train_ill)
             if epoch <= self.args.il_start:
                 if epoch % 50 == 0:
@@ -391,30 +436,35 @@ class HUMEA:
                 self.train_list = self.train_ill
 
             for si in np.arange(0, self.train_list.shape[0], bsize):
-                in_loss = self.inner_view_loss(
-                    gph_emb,
-                    rel_emb,
-                    att_emb,
-                    att_text_emb,
-                    rel_text_emb,
-                    img_emb,
-                    self.train_list[si : si + bsize],
-                )
-                align_loss = self.kl_alignment_loss(
-                    joint_emb,
-                    gph_emb,
-                    rel_emb,
-                    att_emb,
-                    att_text_emb,
-                    rel_text_emb,
-                    img_emb,
-                    self.train_list[si : si + bsize],
-                )
-                loss_all.append(in_loss + align_loss)
+                if self.args.without != 7:
+                    # single model align
+                    in_loss = self.inner_view_loss(
+                        gph_emb,
+                        rel_emb,
+                        att_emb,
+                        att_text_emb,
+                        rel_text_emb,
+                        img_emb,
+                        self.train_list[si : si + bsize],
+                    )
+                    loss_all.append(in_loss)
+
+                if self.args.without != 8:
+                    # joint align to single
+                    in_loss = self.kl_alignment_loss(
+                        joint_emb,
+                        gph_emb,
+                        rel_emb,
+                        att_emb,
+                        att_text_emb,
+                        rel_text_emb,
+                        img_emb,
+                        self.train_list[si : si + bsize],
+                    )
+                    loss_all.append(in_loss)
 
             del gph_emb, rel_emb, att_emb, att_text_emb, rel_text_emb, img_emb
             torch.cuda.empty_cache()
-
             for si in np.arange(0, self.train_list.shape[0], bsize):
                 loss_joi = self.criterion_cl(
                     joint_emb, self.train_list[si : si + bsize]
@@ -423,7 +473,27 @@ class HUMEA:
 
             sum(loss_all).backward()
             self.optimizer.step()
-            if epoch % self.args.check_point == 0:
+
+            # train estimator
+            self.mi_estimator.train()
+            self.mi_optimizer.zero_grad()
+            with torch.no_grad():
+                _, embeddings = self.multimodal_encoder(
+                    self.device,
+                    self.input_idx,
+                    self.adj,
+                    self.img_features,
+                    self.rel_features,
+                    self.att_features,
+                    self.att_txt_features,
+                    self.rel_txt_features,
+                    exp_outputs=True,
+                )
+            estimator_loss = self.mi_estimator.train_estimator(embeddings)
+            estimator_loss.backward()
+            self.mi_optimizer.step()
+
+            if epoch != 0 and epoch % self.args.check_point == 0:
                 print("\n[epoch {:d}] checkpoint!".format(epoch))
                 self.test(epoch)
 
@@ -431,6 +501,7 @@ class HUMEA:
         print("[total time elapsed: {:.4f} s]".format(time.time() - t_total))
 
     def test(self, epoch):
+        global best_mrr, best_result
         with torch.no_grad():
             self.multimodal_encoder.eval()
             self.multi_loss_layer.eval()
@@ -455,20 +526,20 @@ class HUMEA:
                 rel_text_features=self.rel_txt_features,
             )
             logger.info(f"{self.multimodal_encoder.joint.latest_weights}")
-            top_k = [1, 5, 10]
             results = {
-                "gph_emb": gph_emb,
-                "img_emb": img_emb,
-                "att_emb": att_emb,
+                # "gph_emb": gph_emb,
+                # "img_emb": img_emb,
+                # "att_emb": att_emb,
                 "joint_emb": joint_emb,
-                "rel_emb": rel_emb,
-                "att_text_emb": att_text_emb,
-                "rel_text_emb": rel_text_emb,
+                # "rel_emb": rel_emb,
+                # "att_text_emb": att_text_emb,
+                # "rel_text_emb": rel_text_emb,
             }
             for name, emb in results.items():
-                acc_l2r, acc_r2l = self.evaluate_embedding(
-                    emb, f"epoch {epoch} - {name}", top_k
-                )
+                acc, mr, mrr = self.evaluate_embedding(emb, f"epoch {epoch} - {name}")
+                if mrr > best_mrr:
+                    best_mrr = mrr
+                    best_result = (epoch, name, acc, mr, mrr)
 
             del (
                 gph_emb,
@@ -480,7 +551,7 @@ class HUMEA:
                 joint_emb,
             )
 
-    def evaluate_embedding(self, emb, name, top_k):
+    def evaluate_embedding(self, emb, name):
         emb = F.normalize(emb)
         acc_l2r = np.zeros((len(top_k)), dtype=np.float32)
         acc_r2l = np.zeros((len(top_k)), dtype=np.float32)
@@ -519,9 +590,17 @@ class HUMEA:
             f"{name} avg: acc@{top_k}={((acc_l2r + acc_r2l) / 2)}, mr={(mean_l2r + mean_r2l) / 2:.3f}, mrr={(mrr_l2r + mrr_r2l) / 2:.3f}"
         )
 
-        return (acc_l2r, acc_r2l)
+        return (
+            (acc_l2r + acc_r2l) / 2,
+            (mean_l2r + mean_r2l) / 2,
+            (mrr_l2r + mrr_r2l) / 2,
+        )
 
 
 if __name__ == "__main__":
     model = HUMEA()
     model.train()
+    (epoch, name, acc, mr, mrr) = best_result
+    logger.info(
+        f"Best avg epoch <{epoch}>: acc@{top_k}={acc}, mr={mr:.3f}, mrr={mrr:.3f}"
+    )

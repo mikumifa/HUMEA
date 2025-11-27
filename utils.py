@@ -1,5 +1,6 @@
-from collections import Counter
 import pickle
+from collections import Counter
+
 import numpy as np
 import scipy.sparse as sp
 import torch
@@ -26,8 +27,6 @@ def sparse_mx_to_torch_sparse_tensor(sparse_mx):
 
 
 def read_raw_data(file_dir, l=[1, 2], reverse=False):
-    print("loading raw data...")
-
     def read_file(file_paths):
         tups = []
         for file_path in file_paths:

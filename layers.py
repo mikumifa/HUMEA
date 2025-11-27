@@ -13,13 +13,14 @@ from torch.nn.parameter import Parameter
 from torch.nn.modules.module import Module
 import torch.nn.functional as F
 
+# !!! 需要改为执行用的GPU号码 或者改成0
+
 
 class SpecialSpmmFunction(torch.autograd.Function):
     """Special function for only sparse region backpropataion layer."""
 
     @staticmethod
     def forward(ctx, indices, values, shape, b):
-        assert indices.requires_grad == False
         a = torch.sparse_coo_tensor(indices, values, shape)
         ctx.save_for_backward(a, b)
         ctx.N = shape[0]
@@ -208,7 +209,7 @@ class PWLayer(nn.Module):
         return self.lin(self.dropout(x) - self.bias)
 
 
-class MoEAdaptorLayer(nn.Module):
+class MoEAdaptorLayer(nn.Module):  # MOE论文上面的源代码,MoE门控融合
     """MoE-enhanced Adaptor"""
 
     def __init__(self, n_exps=5, layers=[], dropout=0.0, noise=True):
@@ -251,7 +252,7 @@ class MoEAdaptorLayer(nn.Module):
             multiple_outputs.sum(dim=-2),
             expert_outputs,
             gates,
-        )
+        )  # multiple_outputs是混合的，expert_outputs是多个，gates是权重
 
 
 class MultiLossLayer(nn.Module):

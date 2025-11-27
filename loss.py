@@ -33,11 +33,11 @@ class icl_loss(nn.Module):
         return loss
 
     def forward(self, emb, train_links, emb2=None, norm=True):
+        # norm 等价于L2
         if norm:
             emb = F.normalize(emb, dim=1)
             if emb2 is not None:
                 emb2 = F.normalize(emb2, dim=1)
-        num_ent = emb.shape[0]
         # Get (normalized) hidden1 and hidden2.
         zis = emb[train_links[:, 0]]
         if emb2 is not None:
@@ -84,8 +84,6 @@ class icl_loss(nn.Module):
             torch.matmul(hidden2, torch.transpose(hidden1_large, 0, 1)) / temperature
         )
 
-        # logits_a = torch.cat([logits_ab, self.intra_weight*logits_aa], dim=1)
-        # logits_b = torch.cat([logits_ba, self.intra_weight*logits_bb], dim=1)
         if self.inversion:
             logits_a = torch.cat([logits_ab, logits_bb], dim=1)
             logits_b = torch.cat([logits_ba, logits_aa], dim=1)
