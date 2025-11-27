@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200">
+  <rect width="1600" height="1200" fill="#ffffff"/>
+  <text x="800" y="400" font-size="36" font-family="Arial" text-anchor="middle" fill="#000000">
+    HUMEA Architecture
+  </text>
+  <text x="800" y="460" font-size="24" font-family="Arial" text-anchor="middle" fill="#000000">
+    On Modality Weighting and Specificity for Multi-Modal Entity Alignment (AAAI)
+  </text>
+  <text x="800" y="520" font-size="20" font-family="Arial" text-anchor="middle" fill="#000000">
+    Refer to the published figure for the full detailed diagram.
+  </text>
+</svg>
