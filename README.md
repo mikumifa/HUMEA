@@ -2,7 +2,7 @@
 
 Implementation of the AAAI paper **"On Modality Weighting and Specificity for Multi-Modal Entity Alignment"**. This repository provides the code to train and evaluate the Hierarchical Mixture-of-Experts (HUMEA) framework for aligning entities across multi-modal knowledge graphs.
 
-![HUMEA Architecture](docs/architecture.svg)
+![HUMEA Architecture](docs/overall.png)
 
 ## Table of Contents
 - [Background](#background)

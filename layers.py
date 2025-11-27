@@ -209,7 +209,7 @@ class PWLayer(nn.Module):
         return self.lin(self.dropout(x) - self.bias)
 
 
-class MoEAdaptorLayer(nn.Module):  # MOE论文上面的源代码,MoE门控融合
+class MoEAdaptorLayer(nn.Module):
     """MoE-enhanced Adaptor"""
 
     def __init__(self, n_exps=5, layers=[], dropout=0.0, noise=True):
@@ -252,7 +252,7 @@ class MoEAdaptorLayer(nn.Module):  # MOE论文上面的源代码,MoE门控融合
             multiple_outputs.sum(dim=-2),
             expert_outputs,
             gates,
-        )  # multiple_outputs是混合的，expert_outputs是多个，gates是权重
+        )
 
 
 class MultiLossLayer(nn.Module):

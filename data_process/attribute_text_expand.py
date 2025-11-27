@@ -5,7 +5,6 @@ from tqdm import tqdm
 from transformers import RobertaModel, RobertaTokenizer
 import re
 
-# --------- 初始化 RoBERTa ----------
 device = "cuda:1" if torch.cuda.is_available() else "cpu"
 print("Device:", device)
 
@@ -14,9 +13,6 @@ model = RobertaModel.from_pretrained("roberta-base").to(device).eval()
 
 
 def get_embedding_batch(texts, batch_size=32):
-    """
-    输入一批文本，返回每个文本的 [CLS] embedding。
-    """
     all_embeddings = []
     for i in tqdm(range(0, len(texts), batch_size)):
         batch_texts = texts[i : i + batch_size]
